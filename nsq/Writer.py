@@ -115,9 +115,7 @@ class Writer(object):
         
         conn = random.choice(self.conns.values())
         try:
-            cmd = getattr(nsq, command)
-            conn.send(cmd(topic, msg))
-            
+            conn.send(msg)
             conn.callback_queue.append(callback)
         except Exception, error:
             logging.exception('[%s] failed to send %s' % (conn.id, command))
